@@ -1,3 +1,4 @@
+import gdown
 import os
 import torch
 import torch.nn as nn
@@ -39,6 +40,16 @@ def load_model():
     num_classes = 7 # UPDATED: 7 classes for the new model
     print(f"--> Building model with {num_classes} classes...")
     
+    if not os.path.exists(MODEL_WEIGHTS_PATH):
+        print("--> Model not found. Downloading from Google Drive...")
+        
+        os.makedirs(os.path.dirname(MODEL_WEIGHTS_PATH), exist_ok=True)
+        
+        url = "https://drive.google.com/uc?id=16fFJPwYsjLTODNxzeDfwtCrhi6pi7Sx0"
+        gdown.download(url, MODEL_WEIGHTS_PATH, quiet=False)
+        
+        print("--> Model downloaded successfully!")
+        
     # 1. Spin up base model architecture
     model = timm.create_model(
         MODEL_NAME,

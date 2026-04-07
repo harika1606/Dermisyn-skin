@@ -18,6 +18,10 @@ app = Flask(__name__)
 # Enable CORS for all routes (allows React frontend to talk to us)
 CORS(app, resources={r"/api/*": {"origins": "*"}, r"/uploads/*": {"origins": "*"}})
 
+@app.route("/")
+def home():
+    return "Dermisyn backend is running!"
+
 # --- Configuration ---
 UPLOAD_FOLDER = os.path.join(os.path.dirname(__file__), 'uploads')
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
