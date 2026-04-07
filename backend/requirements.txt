@@ -1,0 +1,16 @@
+flask==3.1.1
+flask-cors==5.0.0
+torch>=2.0.0
+torchvision>=0.15.0
+timm==1.0.13
+albumentations==2.0.8
+Pillow==11.1.0
+numpy==1.26.4
+pandas==2.2.3
+Flask-SQLAlchemy==3.1.1
+Flask-Bcrypt==1.0.1
+Flask-JWT-Extended==4.7.1
+pymysql==1.1.0
+cryptography==44.0.1
+python-dotenv==1.0.1
+gunicorn==23.0.0

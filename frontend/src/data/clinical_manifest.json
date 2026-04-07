@@ -1,0 +1,115 @@
+{
+  "melanoma": {
+    "clinical_overview": "Melanoma is a serious and potentially life-threatening form of skin cancer that originates in the pigment-producing cells. While it represents a smaller portion of skin cancer cases, it's responsible for the majority of related deaths, making early and accurate detection absolutely vital.",
+    "dermoscopic_features": [
+      "Atypical and irregular pigment network architectures.",
+      "Asymmetrical dots and globules distributed irregularly.",
+      "Presence of a blue-white veil indicating deeper invasion.",
+      "Irregular streaks and pseudopods at the lesion's edge."
+    ],
+    "risk_factors": [
+      "History of severe, blistering sunburns, especially in childhood.",
+      "High count of typical moles or presence of 'atypical' dysplastic nevi.",
+      "Family history of melanoma or specific genetic mutations.",
+      "Fair skin (Fitzpatrick types I-II) and lighter hair/eye colors."
+    ],
+    "management_protocol": "The primary approach is surgical excision with clear, healthy margins. For deeper lesions, a sentinel lymph node biopsy is often necessary to check for spread. Advanced cases are managed with modern targeted therapies or immunotherapy to stimulate the body's own immune response.",
+    "differential_diagnosis": "Highly pigmented moles/nevi, pigmented Basal Cell Carcinoma, severe atypical nevi, and dark Seborrheic Keratoses."
+  },
+  "bcc": {
+    "clinical_overview": "Basal Cell Carcinoma (BCC) is the most frequently diagnosed skin cancer worldwide. It typically develops in areas frequently exposed to the sun and grows slowly over time. While it rarely spreads to other parts of the body, it can be locally destructive to skin and tissue if left untreated.",
+    "dermoscopic_features": [
+      "Distinct 'arborizing' or branching blood vessels across the surface.",
+      "A characteristic pearly, translucent, or pinkish background.",
+      "Leaf-like structures or large blue-gray ovoid nests.",
+      "Small, localized ulcerations in more established lesions."
+    ],
+    "risk_factors": [
+      "Years of cumulative sun exposure and ultraviolet (UV) light.",
+      "Fair skin that tends to burn rather than tan.",
+      "Advancing age and history of previous skin cancers.",
+      "Exposure to radiation therapy or certain environmental toxins."
+    ],
+    "management_protocol": "Standard treatment involves surgical removal with clear margins. For sensitive areas like the face, Mohs micrographic surgery is preferred to preserve as much healthy tissue as possible. Superficial cases can sometimes be managed with topical creams or light therapy.",
+    "differential_diagnosis": "Squamous Cell Carcinoma (SCC), Actinic Keratosis (AK), Sebaceous Hyperplasia, and amelanotic variants of melanoma."
+  },
+  "psoriasis": {
+    "clinical_overview": "Psoriasis is a chronic, immune-driven condition that causes skin cells to build up rapidly, forming thick, scaly patches. It often follows a cycle of flares and remissions, affecting not just the skin but also joint health and overall systemic well-being.",
+    "dermoscopic_features": [
+      "Uniformly distributed 'red dot' vessels across the lesion.",
+      "A consistent light pink or red background color.",
+      "Classic silvery-white, mica-like scales on the surface."
+    ],
+    "risk_factors": [
+      "Strong genetic predisposition within families.",
+      "Emotional stress or physical illness/infection triggers.",
+      "Metabolic health factors, including higher BMI.",
+      "Certain medications used for blood pressure or mental health."
+    ],
+    "management_protocol": "Localized patches are managed with high-potency topical steroids and moisturizing treatments. For more widespread conditions, ultraviolet light therapy (phototherapy) or advanced biologic medications are used to regulate the underlying immune response.",
+    "differential_diagnosis": "Lichen Planus, Seborrheic Dermatitis, Tinea (fungal infections), and Nummular Eczema."
+  },
+  "seborrheic": {
+    "clinical_overview": "Seborrheic Keratoses are extremely common, benign skin growths that often appear as we age. They have a characteristic 'stuck-on' appearance and, while they can sometimes be mistaken for more serious lesions, they are physiologically harmless and do not require treatment unless for cosmetic reasons.",
+    "dermoscopic_features": [
+      "Small, bright 'milia-like' cysts within the growth.",
+      "Characteristic 'comedo-like' openings or dark keratin plugs.",
+      "Fissures and ridges giving a 'brain-like' or furrowed texture.",
+      "Sharp, well-defined borders with no suspicious pigment network."
+    ],
+    "risk_factors": [
+      "Natural aging process (very common after age 40).",
+      "Family history of similar benign skin growths.",
+      "History of cumulative sun exposure over many years."
+    ],
+    "management_protocol": "Because these are benign, no medical treatment is necessary. If they become irritated by clothing or are cosmetically bothersome, they can be easily removed via cryotherapy (freezing), light scraping, or minor cauterization.",
+    "differential_diagnosis": "Atypical moles, pigmented BCC, common warts, or solar lentigines (age spots)."
+  },
+  "eczema": {
+    "clinical_overview": "Atopic Dermatitis, or Eczema, is a persistent inflammatory condition that often begins in childhood. It's characterized by intense itching and dry, sensitive skin, frequently linked to a family history of seasonal allergies or asthma.",
+    "dermoscopic_features": [
+      "Patchy, yellowish serous crusting on the surface.",
+      "Non-specific red dots over an inflamed pink background.",
+      "Distinct lack of the thick, silver scaling seen in psoriasis."
+    ],
+    "risk_factors": [
+      "Genetic factors affecting the skin's natural moisture barrier.",
+      "Family history of the 'Atopic Triad' (asthma, eczema, allergies).",
+      "Living in dry, cold climates or high-pollution urban areas.",
+      "Exposure to harsh soaps, detergents, or synthetic fabrics."
+    ],
+    "management_protocol": "The foundation of care is consistent, aggressive moisturizing to restore the skin barrier. Flares are managed with topical steroids or non-steroidal creams. For chronic, severe cases, modern injectable biologics offer significant relief by targeting the inflammation at its source.",
+    "differential_diagnosis": "Contact dermatitis, fungal infections, scabies, or early-stage psoriasis."
+  },
+  "vascular": {
+    "clinical_overview": "Vascular lesions, like Cherry Angiomas, are common overgrowths of small blood vessels. They are usually bright red papules and are perfectly harmless. While they can appear suddenly, they are benign and do not indicate underlying health issues.",
+    "dermoscopic_features": [
+      "Well-defined red, purple, or blue 'lagoons' of blood.",
+      "Pale white or yellow lines dividing the vascular areas.",
+      "Complete absence of any suspicious pigment or melanin structure."
+    ],
+    "risk_factors": [
+      "Advancing age is the primary factor for most vascular growths.",
+      "Changes in hormone levels, common during pregnancy.",
+      "Minor skin trauma can sometimes trigger localized vascular reactive growths."
+    ],
+    "management_protocol": "These are benign and normally left alone. If they bleed frequently due to location or are cosmetically undesirable, they can be flawlessly removed by laser therapy, minor cauterization, or simple excision.",
+    "differential_diagnosis": "Amelanotic melanoma (rare but essential to exclude), Kaposi sarcoma, or inflammatory reactive growths."
+  },
+  "urticaria": {
+    "clinical_overview": "Urticaria, commonly known as hives, is a reactive skin condition that causes itchy, raised welts. These can be triggered by anything from medications and food to stress. Most cases are transient and resolve quickly, though some can become chronic.",
+    "dermoscopic_features": [
+      "A featureless, inflamed pink or red background.",
+      "Faint vascular patterns without any surface scaling.",
+      "Central areas of the welts may appear paler due to swelling (edema)."
+    ],
+    "risk_factors": [
+      "Sensitivities to common medications or foods.",
+      "Environmental factors like pollen or temperature extremes.",
+      "Underlying autoimmune health factors in chronic cases.",
+      "Physical triggers such as pressure, friction, or intense exercise."
+    ],
+    "management_protocol": "Initial management relies on non-drowsy antihistamines to block the allergic response. If the hives become chronic or severe, doctors may prescribe specialized medications to regulate the immune system long-term. Avoiding known triggers is always the first line of defense.",
+    "differential_diagnosis": "Urticarial vasculitis, early-stage bullous conditions, or viral-related rashes."
+  }
+}

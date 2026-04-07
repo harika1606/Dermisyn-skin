@@ -1,0 +1,33 @@
+# Python
+backend/__pycache__/
+backend/venv/
+backend/*.pyc
+backend/uploads/*
+!backend/uploads/.gitkeep
+backend/app.db
+
+# Models (Handled by Git LFS, but good to keep clear)
+# backend/models/best_model_v4.pth
+
+# React / Node
+frontend/node_modules/
+frontend/dist/
+frontend/.env
+frontend/build2.log
+frontend/build_err.log
+
+# System / IDE
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.log
+tmp/
+CVS/
+.env
+venv/
+*.zip
+*.pth
+*log*.txt
+*error*.txt
+__pycache__/
