@@ -149,7 +149,7 @@ export function RecordsView({ scans, setScans, setActiveView, authToken }) {
                            <div className={`px-2 py-0.5 rounded-md text-[9px] font-black uppercase tracking-widest border ${scan?.is_malignant ? 'bg-rose-50 text-rose-600 border-rose-100' : 'bg-slate-50 text-slate-500 border-slate-100'}`}>
                               {scan?.is_malignant ? 'High Priority' : 'Routine'}
                            </div>
-                           <p className="text-sm font-black text-slate-900 leading-none">{scan?.confidence}% Confidence</p>
+                           <p className="text-sm font-black text-slate-900 leading-none">{scan?.risk_score}% Malignancy Risk</p>
                         </div>
                         
                         <button 
@@ -236,8 +236,8 @@ export function RecordsView({ scans, setScans, setActiveView, authToken }) {
                         </div>
                       </div>
                       <div className="text-right">
-                        <p className="text-[11px] font-black text-slate-400 uppercase tracking-widest mb-1">Accuracy</p>
-                        <div className="text-2xl font-black text-slate-900 tracking-tighter">{selectedScan.confidence}<span className="text-sm text-violet-600">%</span></div>
+                        <p className="text-[11px] font-black text-slate-400 uppercase tracking-widest mb-1">Malignancy Risk</p>
+                        <div className="text-2xl font-black text-slate-900 tracking-tighter">{selectedScan.risk_score}<span className="text-sm text-violet-600">%</span></div>
                       </div>
                     </div>
 
@@ -270,7 +270,7 @@ export function RecordsView({ scans, setScans, setActiveView, authToken }) {
                            </div>
                            <p className="text-slate-700 text-[13px] leading-relaxed font-medium">
                               Historical entry for <span className="text-slate-950 font-bold uppercase">{selectedScan.location}</span> specimen. 
-                              Classification: <span className={`${selectedScan.is_malignant ? 'text-rose-700' : 'text-violet-700'} font-extrabold uppercase`}>{selectedScan.prediction}</span> (CI: <span className={`${selectedScan.is_malignant ? 'text-rose-700' : 'text-violet-700'} font-black`}>{selectedScan.confidence}%</span>).
+                              Classification: <span className={`${selectedScan.is_malignant ? 'text-rose-700' : 'text-violet-700'} font-extrabold uppercase`}>{selectedScan.prediction}</span> (Risk: <span className={`${selectedScan.is_malignant ? 'text-rose-700' : 'text-violet-700'} font-black`}>{selectedScan.risk_score}%</span>).
                               
                               <span className="block mt-2">
                                   {selectedScan.is_malignant ? (

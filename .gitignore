@@ -27,7 +27,11 @@ CVS/
 .env
 venv/
 *.zip
-*.pth
 *log*.txt
 *error*.txt
 __pycache__/
+final_7class_dataset/
+*log*.txt
+*error*.txt
+eslint_*.txt
+lint_*.txt

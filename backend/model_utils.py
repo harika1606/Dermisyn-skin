@@ -12,24 +12,25 @@ from PIL import Image
 IMG_SIZE = 224
 MODEL_NAME = "swin_tiny_patch4_window7_224"
 
-# Exact classes from cell 10 of the training notebook
+# Calibrated 7-Class Registry (v4.2 Calibration)
 DEFAULT_CLASS_NAMES = [
-    "Actinic Keratosis Basal Cell Carcinoma And Other Malignant Lesions",
-    "Eczema Photos",
-    "Melanoma Skin Cancer Nevi And Moles",
-    "Psoriasis Pictures Lichen Planus And Related Diseases",
-    "Seborrheic Keratoses And Other Benign Tumors",
-    "Urticaria Hives",
-    "Vascular Tumors"
+    "Melanoma Skin Cancer Nevi And Moles", # Index 0 (Validated via Anchor Test)
+    "Actinic Keratosis Basal Cell Carcinoma And Other Malignant Lesions", # Index 1
+    "Eczema Photos", # Index 2
+    "Psoriasis Pictures Lichen Planus And Related Diseases", # Index 3
+    "Seborrheic Keratoses And Other Benign Tumors", # Index 4
+    "Urticaria Hives", # Index 5
+    "Vascular Tumors" # Index 6
 ]
 
 # Path to the 7-class model weights (Cloud-Ready Portable Path)
 MODEL_WEIGHTS_PATH = os.path.join(os.path.dirname(__file__), "models", "best_model_v4.pth")
 
 def get_val_transforms(size=224):
-    """Matches the exact inference transformations from cell 16 of the notebook"""
+    """Calibrated preprocessing for Swin-Transformer (Bicubic + ImageNet Norm)"""
+    import cv2
     return A.Compose([
-        A.Resize(size, size),
+        A.Resize(size, size, interpolation=cv2.INTER_CUBIC),
         A.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
         ToTensorV2(),
     ])
@@ -195,9 +196,17 @@ def predict_image(image_path, model, class_names, device, force=False):
     # Sort report by highest confidence first
     full_report = sorted(full_report, key=lambda x: x["confidence"], reverse=True)
 
+    # Calculate Risk Score (Sum of malignant class probabilities)
+    malignant_probs = [
+        probabilities[idx].item() for idx, name in enumerate(class_names)
+        if name in ["Melanoma Skin Cancer Nevi And Moles", "Actinic Keratosis Basal Cell Carcinoma And Other Malignant Lesions"]
+    ]
+    risk_score = round(sum(malignant_probs) * 100, 2)
+
     return {
         "prediction": pretty_class_name,
         "confidence": round(confidence * 100, 2),
+        "risk_score": risk_score, # Total probability of malignancy
         "risk_level": risk_level,
         "status_label": status_label,
         "is_valid": is_valid,

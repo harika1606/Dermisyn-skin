@@ -78,19 +78,19 @@ export function AuthView({ setAuthToken }) {
               </h1>
               <div className="flex items-center justify-center gap-2">
                 <div className="w-2 h-2 rounded-full bg-violet-500 animate-pulse" />
-                <p className="text-[11px] font-black text-slate-400 uppercase tracking-widest leading-none">Diagnostic Sync v5.2 Active</p>
+                <p className="text-[11px] font-black text-slate-400 uppercase leading-none">Diagnostic Sync v5.2 Active</p>
               </div>
             </div>
           </div>
         </div>
 
         <Card className="p-10 premium-card border-violet-100 bg-white shadow-2xl relative rounded-[2.5rem] overflow-hidden">
-          <div className="text-center mb-12">
-            <h2 className="text-xl font-black text-slate-900 tracking-tighter uppercase mb-2">
-              {isLoginMode ? 'Clinician Entry' : 'Clinical Registration'}
+          <div className="text-center mb-8">
+            <h2 className="text-xl font-black text-slate-900 uppercase mb-2">
+              {isLoginMode ? 'Doctor Login' : 'Create Account'}
             </h2>
-            <p className="text-[11px] font-bold text-slate-400 uppercase tracking-[0.2em] px-10 leading-relaxed">
-              Authorized diagnostic synchronization only.
+            <p className="text-[11px] font-bold text-slate-400 uppercase px-10 leading-relaxed">
+              Only for authorized staff.
             </p>
           </div>
 
@@ -103,12 +103,12 @@ export function AuthView({ setAuthToken }) {
                   exit={{ opacity: 0, height: 0 }}
                   className="group/field overflow-hidden"
                 >
-                  <label className="text-[11px] font-black uppercase tracking-widest ml-1 mb-3 block text-slate-400 group-focus-within/field:text-violet-600 transition-colors">Identification</label>
+                  <label className="text-[11px] font-black uppercase ml-1 mb-2 block text-slate-400 group-focus-within/field:text-violet-600 transition-colors">Full Name</label>
                   <div className="relative">
                     <UserIcon className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-300 group-focus-within/field:text-violet-600 transition-colors" />
                     <input 
                       type="text" 
-                      placeholder="Practitioner Full Name"
+                      placeholder="Enter your name"
                       className="w-full h-14 bg-slate-50 border border-slate-100 rounded-2xl px-12 font-bold text-sm text-slate-900 focus:outline-none focus:border-violet-600 focus:bg-white transition-all shadow-inner"
                       value={formData.name} onChange={e => handleInputChange('name', e.target.value)}
                     />
@@ -118,12 +118,12 @@ export function AuthView({ setAuthToken }) {
             </AnimatePresence>
             
             <div className="group/field">
-              <label className="text-[11px] font-black uppercase tracking-widest ml-1 mb-3 block text-slate-400 group-focus-within/field:text-violet-600 transition-colors">Email Registry</label>
+              <label className="text-[11px] font-black uppercase ml-1 mb-2 block text-slate-400 group-focus-within/field:text-violet-600 transition-colors">Email</label>
               <div className="relative">
                 <Globe className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-300 group-focus-within/field:text-violet-600 transition-colors" />
                 <input 
                   type="email" 
-                  placeholder="clinician@dermisyn.ai"
+                  placeholder="you@example.com"
                   className="w-full h-14 bg-slate-50 border border-slate-100 rounded-2xl px-12 font-bold text-sm text-slate-900 focus:outline-none focus:border-violet-600 focus:bg-white transition-all shadow-inner"
                   value={formData.email} onChange={e => handleInputChange('email', e.target.value)}
                 />
@@ -131,7 +131,7 @@ export function AuthView({ setAuthToken }) {
             </div>
             
             <div className="group/field">
-              <label className="text-[11px] font-black uppercase tracking-widest ml-1 mb-3 block text-slate-400 group-focus-within/field:text-violet-600 transition-colors">Security Key</label>
+              <label className="text-[11px] font-black uppercase ml-1 mb-2 block text-slate-400 group-focus-within/field:text-violet-600 transition-colors">Password</label>
               <div className="relative">
                 <Fingerprint className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-300 group-focus-within/field:text-violet-600 transition-colors" />
                 <input 
@@ -146,27 +146,27 @@ export function AuthView({ setAuthToken }) {
             {errorMessage && (
               <motion.div initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} className="p-4 bg-rose-50 border border-rose-100 rounded-2xl flex items-center gap-3">
                 <ShieldAlert className="w-5 h-5 text-rose-500" />
-                <p className="text-[11px] font-black text-rose-600 uppercase tracking-widest">{errorMessage}</p>
+                <p className="text-[11px] font-black text-rose-600 uppercase">{errorMessage}</p>
               </motion.div>
             )}
 
             <Button 
               type="submit" 
-              className="w-full h-16 mt-4 !rounded-2xl shadow-xl flex items-center justify-center gap-3 active:scale-[0.99] transition-transform" 
+              className="w-full h-16 mt-2 !rounded-2xl shadow-xl flex items-center justify-center gap-3 active:scale-[0.99] transition-transform" 
               isLoading={isSubmitting}
             >
               <Cpu className="w-5 h-5" />
-              {isLoginMode ? 'Initialize Sync' : 'Grant Registry Access'}
+              {isLoginMode ? 'Login' : 'Sign Up'}
             </Button>
           </form>
 
-          <footer className="mt-10 text-center pt-8 border-t border-slate-50">
+          <footer className="mt-6 text-center pt-4 border-t border-slate-50">
             <button 
               type="button"
               onClick={() => { setIsLoginMode(!isLoginMode); setErrorMessage(''); }} 
-              className="text-[11px] font-black text-slate-400 uppercase tracking-widest hover:text-violet-600 transition-colors flex items-center justify-center gap-2 mx-auto"
+              className="text-[11px] font-black text-slate-400 uppercase hover:text-violet-600 transition-colors flex items-center justify-center gap-2 mx-auto"
             >
-              {isLoginMode ? "Need Clinical Access?" : "Existing Practitioner Details"} <ChevronRight className="w-4 h-4" />
+              {isLoginMode ? "New here? Register" : "Back to Login"} <ChevronRight className="w-4 h-4" />
             </button>
           </footer>
         </Card>

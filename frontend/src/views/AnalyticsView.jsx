@@ -120,11 +120,19 @@ export function AnalyticsView({ scans, setActiveView }) {
 
             <div className="w-[1px] h-24 bg-slate-100 hidden md:block" />
 
-            <div className="flex flex-col items-center justify-center p-8 bg-violet-600 rounded-3xl min-w-[280px] shadow-2xl relative overflow-hidden group/gauge cursor-default transition-transform hover:scale-[1.02]">
-               <div className="absolute inset-0 bg-gradient-to-br from-violet-400/20 to-transparent opacity-50" />
-               <BrainCircuit className="w-8 h-8 text-white mb-4 relative z-10" />
-               <p className="text-4xl font-black text-white tracking-tighter mb-1 relative z-10">{avgConfidence}%</p>
-               <p className="text-[11px] font-black text-violet-100 uppercase tracking-[0.2em] relative z-10">Mean Confidence Index</p>
+            <div className={`flex flex-col items-center justify-center p-5 rounded-2xl min-w-[200px] shadow-2xl relative overflow-hidden group/gauge cursor-default transition-all duration-500 hover:scale-[1.02] border border-white/10 ${parseFloat(malignancyRatio) > 0 ? 'bg-rose-600' : 'bg-violet-600'}`}>
+               <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent opacity-50" />
+               {parseFloat(malignancyRatio) > 0 ? (
+                 <ShieldAlert className="w-6 h-6 text-white mb-3 relative z-10 animate-pulse" />
+               ) : (
+                 <ShieldCheck className="w-6 h-6 text-white mb-3 relative z-10" />
+               )}
+               <div className="text-center relative z-10">
+                 <p className="text-3xl font-black text-white tracking-tighter leading-none mb-1">{malignancyRatio}%</p>
+                 <p className="text-[9px] font-black text-white/90 uppercase tracking-[0.2em] mb-1">Total Clinical Risk</p>
+                 <div className="w-8 h-0.5 bg-white/30 mx-auto mb-1 rounded-full" />
+                 <p className="text-[7px] font-bold text-white/70 uppercase tracking-widest leading-none">Global Model Consensus: {avgConfidence}%</p>
+               </div>
             </div>
          </Card>
 
