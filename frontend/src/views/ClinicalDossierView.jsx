@@ -1,5 +1,5 @@
 import React from 'react';
-import { motion } from 'framer-motion'; // eslint-disable-line no-unused-vars
+import { motion } from 'framer-motion';
 import { 
   ArrowLeft, 
   Activity, 
@@ -39,12 +39,12 @@ export function ClinicalDossierView({ selectedClass, onBackToDashboard }) {
       <div className="max-w-6xl mx-auto bg-white min-h-screen shadow-2xl border-x border-slate-100 flex flex-col">
         
         {/* Medical Header - Professional High-Density Sync */}
-        <header className="p-4 md:p-6 border-b border-slate-100 bg-white sticky top-0 z-20">
+        <header className="p-3 md:p-4 border-b border-slate-100 bg-white sticky top-0 z-20">
            <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
               <div className="flex items-center gap-4">
                  <button 
                    onClick={onBackToDashboard}
-                   className="flex items-center gap-2 text-slate-400 hover:text-violet-600 font-bold uppercase tracking-[0.2em] text-[10px] transition-all group"
+                   className="flex items-center gap-2 text-slate-400 hover:text-slate-600 font-bold uppercase tracking-[0.2em] text-[10px] transition-all group"
                  >
                    <ArrowLeft className="w-3.5 h-3.5 group-hover:-translate-x-1 transition-transform" /> 
                    Return
@@ -60,11 +60,11 @@ export function ClinicalDossierView({ selectedClass, onBackToDashboard }) {
                  <div className="text-right hidden sm:block">
                     <p className="text-[9px] font-black text-slate-400 uppercase tracking-widest mb-0 text-right">System Status</p>
                     <div className="flex items-center gap-2 justify-end">
-                       <ShieldCheck className="w-3 h-3 text-emerald-500" />
+                       <ShieldCheck className="w-3 h-3 text-slate-500" />
                        <span className="text-[10px] font-black text-slate-900 uppercase">Verified</span>
                     </div>
                  </div>
-                 <div className={`px-4 py-1.5 rounded-lg border-none shadow-md text-white flex items-center gap-2.5 ${selectedClass.is_malignant ? 'bg-rose-600' : 'bg-violet-600'}`}>
+                 <div className={`px-4 py-1.5 rounded-lg border-none shadow-md text-white flex items-center gap-2.5 ${selectedClass.is_malignant ? 'bg-rose-600' : 'bg-slate-600'}`}>
                     {selectedClass.is_malignant ? <AlertTriangle className="w-3.5 h-3.5"/> : <ShieldCheck className="w-3.5 h-3.5"/>}
                     <span className="font-black uppercase tracking-widest text-[9px]">{selectedClass.risk} Profile</span>
                  </div>
@@ -73,7 +73,7 @@ export function ClinicalDossierView({ selectedClass, onBackToDashboard }) {
         </header>
 
         {/* Master Dossier Body - Optimized Density */}
-        <main className="flex-1 p-5 md:p-8 space-y-8">
+        <main className="flex-1 p-4 md:p-6 space-y-6">
            
            {!data ? (
              <div className="py-16 text-center">
@@ -93,7 +93,7 @@ export function ClinicalDossierView({ selectedClass, onBackToDashboard }) {
                         Diagnostic baseline and context.
                      </p>
                   </div>
-                  <div className="lg:col-span-9 p-5 bg-slate-50/50 rounded-xl border border-slate-100 relative overflow-hidden">
+                  <div className="lg:col-span-9 p-4 bg-slate-50/50 rounded-xl border border-slate-100 relative overflow-hidden">
                      <Activity className="absolute bottom-[-15px] right-[-15px] w-32 h-32 text-slate-950 opacity-[0.02] pointer-events-none" />
                      <p className="text-[14px] font-medium text-slate-700 leading-relaxed relative z-10">
                         {data.clinical_overview}
@@ -114,8 +114,8 @@ export function ClinicalDossierView({ selectedClass, onBackToDashboard }) {
                   </div>
                   <div className="lg:col-span-9 grid grid-cols-1 md:grid-cols-2 gap-3">
                      {data.dermoscopic_features.map((feature, i) => (
-                       <div key={i} className="group p-3.5 bg-white border border-slate-100 rounded-xl hover:border-violet-200 hover:shadow-md transition-all duration-500 flex items-start gap-3">
-                          <div className="w-6 h-6 rounded-md bg-slate-50 border border-slate-100 flex-shrink-0 flex items-center justify-center text-[9px] font-black text-slate-400 group-hover:bg-violet-600 group-hover:text-white group-hover:border-violet-600 transition-all">
+                       <div key={i} className="group p-3.5 bg-white border border-slate-100 rounded-xl hover:border-slate-200 hover:shadow-md transition-all duration-500 flex items-start gap-3">
+                          <div className="w-6 h-6 rounded-md bg-slate-50 border border-slate-100 flex-shrink-0 flex items-center justify-center text-[9px] font-black text-slate-400 group-hover:bg-slate-600 group-hover:text-white group-hover:border-slate-600 transition-all">
                              {(i + 1).toString().padStart(2, '0')}
                           </div>
                           <span className="text-[13px] font-bold text-slate-600 leading-tight flex-1">{feature}</span>
@@ -136,7 +136,7 @@ export function ClinicalDossierView({ selectedClass, onBackToDashboard }) {
                      </p>
                   </div>
                   <div className="lg:col-span-9 grid grid-cols-1 md:grid-cols-2 gap-3">
-                    <div className="p-5 rounded-xl bg-rose-50/50 border border-rose-100">
+                    <div className="p-4 rounded-xl bg-rose-50/50 border border-rose-100">
                         <h3 className="text-[9px] font-black text-rose-600 uppercase tracking-[0.3em] flex items-center gap-2 mb-4">
                             <AlertTriangle className="w-3.5 h-3.5" /> Priority Indicators
                         </h3>
@@ -149,12 +149,12 @@ export function ClinicalDossierView({ selectedClass, onBackToDashboard }) {
                             ))}
                         </ul>
                     </div>
-                    <div className="p-5 rounded-xl bg-slate-50/50 border border-slate-200 flex flex-col items-center justify-center">
+                    <div className="p-4 rounded-xl bg-slate-50/50 border border-slate-200 flex flex-col items-center justify-center">
                         <h3 className="text-[9px] font-black text-slate-900 uppercase tracking-[0.3em] flex items-center gap-2 mb-4">
                             <BrainCircuit className="w-3.5 h-3.5" /> Differential Exclusions
                         </h3>
                         <div className="italic font-bold text-slate-500 text-[13px] leading-relaxed text-center px-4">
-                            "{data.differential_diagnosis}"
+                            &quot;{data.differential_diagnosis}&quot;
                         </div>
                     </div>
                   </div>
@@ -171,17 +171,17 @@ export function ClinicalDossierView({ selectedClass, onBackToDashboard }) {
                          Protocol standards.
                       </p>
                    </div>
-                   <div className="lg:col-span-9 p-6 md:p-8 rounded-2xl bg-slate-950 text-white relative overflow-hidden shadow-xl">
-                        <div className="absolute top-0 right-0 p-8 opacity-10 pointer-events-none">
-                            <Stethoscope className="w-24 h-24" />
+                   <div className="lg:col-span-9 p-6 md:p-7 rounded-2xl bg-slate-50/50 border border-slate-100 relative overflow-hidden">
+                        <div className="absolute top-0 right-0 p-8 opacity-5 pointer-events-none">
+                            <Stethoscope className="w-24 h-24 text-slate-900" />
                         </div>
                         <div className="relative z-10">
-                            <h4 className="text-sm md:text-base font-bold leading-relaxed mb-5 text-white/90">
+                            <h4 className="text-[13px] font-bold leading-relaxed mb-3 text-slate-700">
                                 {data.management_protocol}
                             </h4>
-                            <div className="flex items-center gap-3 pt-5 border-t border-white/10">
-                                <div className="w-1.5 h-1.5 rounded-full bg-violet-500 animate-pulse" />
-                                <p className="text-[9px] font-black uppercase tracking-[0.3em] text-slate-500">ISIC-Standard Verified Protocol</p>
+                            <div className="flex items-center gap-3 pt-3 border-t border-slate-100">
+                                <div className="w-1.5 h-1.5 rounded-full bg-slate-400 group-hover:scale-125 transition-transform" />
+                                <p className="text-[9px] font-black uppercase tracking-[0.3em] text-slate-400">ISIC-Standard Verified Protocol</p>
                             </div>
                         </div>
                    </div>
@@ -190,10 +190,10 @@ export function ClinicalDossierView({ selectedClass, onBackToDashboard }) {
            )}
         </main>
 
-        <footer className="p-5 border-t border-slate-100 bg-white flex flex-col md:flex-row items-center justify-between text-slate-400 gap-5">
+        <footer className="p-4 border-t border-slate-100 bg-white flex flex-col md:flex-row items-center justify-between text-slate-400 gap-5">
            <div className="flex items-center gap-6">
              <div className="flex items-center gap-2">
-               <ShieldCheck className="w-3 h-3 text-emerald-500" />
+               <ShieldCheck className="w-3 h-3 text-slate-500" />
                <span className="text-[9px] font-black uppercase tracking-[0.2em]">Secure Registry</span>
              </div>
              <p className="text-[9px] font-bold uppercase tracking-[0.2em]">Node DS-27.5</p>

@@ -14,20 +14,21 @@ MODEL_NAME = "swin_tiny_patch4_window7_224"
 
 # Calibrated 7-Class Registry (v4.2 Calibration)
 DEFAULT_CLASS_NAMES = [
-    "Melanoma Skin Cancer Nevi And Moles", # Index 0 (Validated via Anchor Test)
-    "Actinic Keratosis Basal Cell Carcinoma And Other Malignant Lesions", # Index 1
-    "Eczema Photos", # Index 2
+    "Seborrheic Keratoses And Other Benign Tumors", # Index 0
+    "Eczema Photos", # Index 1
+    "Melanoma Skin Cancer Nevi And Moles", # Index 2
     "Psoriasis Pictures Lichen Planus And Related Diseases", # Index 3
-    "Seborrheic Keratoses And Other Benign Tumors", # Index 4
+    "Vascular Tumors", # Index 4
     "Urticaria Hives", # Index 5
-    "Vascular Tumors" # Index 6
+    "Actinic Keratosis Basal Cell Carcinoma And Other Malignant Lesions" # Index 6
 ]
 
 # Path to the 7-class model weights (Cloud-Ready Portable Path)
-MODEL_WEIGHTS_PATH = os.path.join(os.path.dirname(__file__), "models", "best_model_v4.pth")
+MODEL_WEIGHTS_PATH = os.path.join(os.path.dirname(__file__), "models", "best_model_v6.pth")
 
 def get_val_transforms(size=224):
     """Calibrated preprocessing for Swin-Transformer (Bicubic + ImageNet Norm)"""
+    import cv2
     import cv2
     return A.Compose([
         A.Resize(size, size, interpolation=cv2.INTER_CUBIC),
@@ -51,12 +52,12 @@ def load_model():
         
         print("--> Model downloaded successfully!")
         
-    # 1. Spin up base model architecture
+    # 1. Spin up base model architecture (Matching notebook cell 19)
     model = timm.create_model(
         MODEL_NAME,
-        pretrained=False, 
-        num_classes=num_classes,
+        pretrained=False
     )
+    model.head = nn.Linear(model.head.in_features, num_classes)
     
     # 2. Force Load Trained Weights
     if os.path.exists(MODEL_WEIGHTS_PATH):
@@ -67,33 +68,31 @@ def load_model():
         state_dict = ckpt["model_state_dict"] if isinstance(ckpt, dict) and "model_state_dict" in ckpt else ckpt
         
         # SMART REMAPPING LOGIC
-        # 1. Strip common prefixes (model., module., backbone., etc)
-        # 2. Map 'head.weight' to 'head.fc.weight' (New timm standard)
+        # 1. Normalize keys and handle standard timm/torchvision prefix mismatches
         new_state_dict = {}
-        model_keys = list(model.state_dict().keys())
+        model_keys = model.state_dict().keys()
         
         for k, v in state_dict.items():
-            # Clean key
-            clean_k = k.replace("model.", "").replace("module.", "").replace("backbone.", "")
+            # Strip common wrapper prefixes
+            new_key = k.replace("model.", "").replace("module.", "").replace("backbone.", "")
             
-            # Specific Head Remapping
-            if clean_k == "head.weight": clean_k = "head.fc.weight"
-            if clean_k == "head.bias": clean_k = "head.fc.bias"
-            
-            if clean_k in model_keys:
-                new_state_dict[clean_k] = v
+            if new_key in model_keys:
+                new_state_dict[new_key] = v
             else:
-                # Debug logging for mismatched keys
-                print(f"--> [DEBUG] Skipping unmatched weight key: {k} (Cleaned: {clean_k})")
+                print(f"--> [DEBUG] Skipping unmatched weight key: {k} -> {new_key}")
         
         # 3. Load with verification
+        print(f"--> [DEBUG] Attempting to load {len(new_state_dict)} matched keys into model...")
         load_result = model.load_state_dict(new_state_dict, strict=False)
         missing = load_result.missing_keys
-        unexpected = load_result.unexpected_keys
         
         if len(missing) > 0:
-            print(f"--> [CRITICAL] Missing {len(missing)} layers! AI will be UNCERTAIN.")
-            # We don't fail here yet to allow the app to boot, but we log the severity
+            # We filter out non-weight keys if any
+            critical_missing = [m for m in missing if not m.endswith(".num_batches_tracked")]
+            if critical_missing:
+                print(f"--> [CRITICAL] Missing {len(critical_missing)} essential layers: {critical_missing[:3]}...")
+            else:
+                print("--> SUCCESS: Base model weights synchronized (tracked buffers skipped).")
         else:
             print("--> SUCCESS: 100% Brain Layers synchronized and active.")
     else:
@@ -122,6 +121,12 @@ def predict_image(image_path, model, class_names, device, force=False):
     # Predict
     with torch.no_grad():
         logits = model(tensor_img)
+        
+        # Handle Swin feature map output (Global Average Pooling)
+        # This is critical if the head was replaced without an internal pool layer
+        if logits.dim() == 4:
+            logits = torch.mean(logits, dim=[2, 3])
+            
         # Apply softmax to get probabilities
         probabilities = torch.nn.functional.softmax(logits, dim=1)[0]
         
@@ -150,24 +155,24 @@ def predict_image(image_path, model, class_names, device, force=False):
     
     pretty_class_name = UI_NAME_MAPPING.get(predicted_class_name, predicted_class_name)
 
-    # Rejection Threshold (lower than 10% is extremely suspect for non-medical imagery)
-    # Between 10-15% is 'Uncertain Presentation'
-    # Above 15% is 'Valid Clinical Case'
-    is_valid = (confidence > 0.15) or force
+    # Calibrated Thresholds for Clinical Deployment
+    # < 20%: Unverifiable / Non-Medical
+    # 20-40%: Indeterminate / Subtle Manifestation
+    # > 40%: Valid Diagnostic Case
+    is_valid = (confidence > 0.40) or force
     
     # Refined Clinical Messaging
     if not is_valid:
-        risk_level = "Unverifiable Presentation"
+        risk_level = "Indeterminate / Subtle Presentation"
         pretty_class_name = "Subtle Clinical Manifestation"
-        # If it's very likely to be one of our classes but confidence is just low
-        status_label = "Awaiting Verification"
+        status_label = "Professional Review Recommended"
     elif is_malignant:
         risk_level = "Potential Malignancy"
-        status_label = "High Clinical Priority"
+        status_label = "Urgent Specialist Review"
     else:
-        # User requested: "non skin cancer image. like it some disease which will cure"
-        risk_level = "Non-Skin Cancer / Common Condition"
-        status_label = "Common / Curable Condition"
+        # Reassurance for non-cancerous conditions
+        risk_level = "Benign / Common Skin Manifestation"
+        status_label = "Non-Malignant Manifestation"
 
     # Generate full classification report for the UI
     full_report = []

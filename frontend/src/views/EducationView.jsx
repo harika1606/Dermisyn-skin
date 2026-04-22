@@ -1,12 +1,12 @@
 import React from 'react';
 import { Card } from '../components/ui/Card';
 import { Button } from '../components/ui/Button';
-import { motion } from 'framer-motion'; // eslint-disable-line no-unused-vars
+import { motion } from 'framer-motion';
 import { Library, AlertCircle, Sun, Activity, Droplets, ArrowLeft, ArrowRight, BookOpen, Microscope, Zap, ChevronRight } from 'lucide-react';
 
 /**
  * EducationView: A resource center for clinicians and patients.
- * Fully transitioned to the 'Clinical Violet' identity with upscaled typography.
+ * Fully transitioned to the 'Clinical slate' identity with upscaled typography.
  */
 export function EducationView({ setActiveView }) {
   const educationalTopics = [
@@ -25,13 +25,13 @@ export function EducationView({ setActiveView }) {
     {
       title: "How AI Sees Skin",
       description: "A deep dive into how our neural engine analyzes color variances, asymmetrical borders, and texture patterns in your scans.",
-      icon: <Activity className="w-8 h-8 text-violet-600" />,
+      icon: <Activity className="w-8 h-8 text-slate-600" />,
       accentColor: "#7c3aed"
     },
     {
       title: "Hydration & Barrier",
       description: "Maintaining the health of your skin's outer layer. Recognizing the signs of dry patches and benign textural changes.",
-      icon: <Droplets className="w-8 h-8 text-violet-400" />,
+      icon: <Droplets className="w-8 h-8 text-slate-400" />,
       accentColor: "#a78bfa"
     }
   ];
@@ -47,15 +47,15 @@ export function EducationView({ setActiveView }) {
       <header className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 mb-8 pt-4 border-b border-slate-50 pb-6">
         <div>
            <div className="flex items-center gap-3 mb-4">
-              <div className="w-10 h-10 rounded-xl bg-violet-50 border border-violet-100 flex items-center justify-center text-violet-600 shadow-sm">
+              <div className="w-10 h-10 rounded-xl bg-slate-50 border border-slate-100 flex items-center justify-center text-slate-600 shadow-sm">
                  <Library className="w-5 h-5" />
               </div>
               <div>
-                 <h3 className="text-[11px] font-black text-violet-600 uppercase tracking-[0.2em]">Resource Library v5.2</h3>
+                 <h3 className="text-[11px] font-black text-slate-600 uppercase tracking-[0.2em]">Resource Library v5.2</h3>
               </div>
            </div>
            <h1 className="text-4xl font-black text-slate-950 uppercase tracking-tighter leading-none mb-2">
-             Knowledge <span className="text-violet-600">Base</span>
+             Knowledge <span className="text-slate-600">Base</span>
            </h1>
            <p className="text-sm text-slate-500 font-medium max-w-xl leading-relaxed">
              Access our vetted collection of insights to better understand your self-assessment results and maintain optimal skin wellness.
@@ -64,7 +64,7 @@ export function EducationView({ setActiveView }) {
         <Button 
           variant="outline" 
           onClick={() => setActiveView('dashboard')} 
-          className="px-6 h-12 border-slate-200 text-slate-400 rounded-xl hover:text-violet-600 transition-all font-black uppercase tracking-widest text-[11px] group"
+          className="px-6 h-12 border-slate-200 text-slate-400 rounded-xl hover:text-slate-600 transition-all font-black uppercase tracking-widest text-[11px] group"
         >
            <ArrowLeft className="w-4 h-4 mr-2 group-hover:-translate-x-1 transition-transform" /> 
            Home Terminal
@@ -73,8 +73,8 @@ export function EducationView({ setActiveView }) {
 
       <div className="space-y-4">
          {/* Featured Content Intro */}
-         <Card className="p-8 premium-card border-violet-100 bg-white shadow-sm flex flex-col md:flex-row items-center gap-8 relative overflow-hidden group rounded-[2.5rem]">
-            <div className="w-20 h-20 rounded-2xl bg-violet-100/50 text-violet-600 flex items-center justify-center shrink-0 border border-violet-100 transition-transform group-hover:scale-105">
+         <Card className="p-8 premium-card border-slate-100 bg-white shadow-sm flex flex-col md:flex-row items-center gap-8 relative overflow-hidden group rounded-[2.5rem]">
+            <div className="w-20 h-20 rounded-2xl bg-slate-100/50 text-slate-600 flex items-center justify-center shrink-0 border border-slate-100 transition-transform group-hover:scale-105">
                <BookOpen className="w-10 h-10" />
             </div>
             <div className="relative z-10">
@@ -89,21 +89,21 @@ export function EducationView({ setActiveView }) {
             {educationalTopics.map((topic, index) => (
               <Card 
                key={index} 
-               className="p-8 group cursor-pointer premium-card border-slate-100 bg-white hover:border-violet-200 transition-all shadow-sm relative overflow-hidden rounded-3xl"
+               className="p-8 group cursor-pointer premium-card border-slate-100 bg-white hover:border-slate-200 transition-all shadow-sm relative overflow-hidden rounded-3xl"
               >
                 <div className="flex items-start gap-6 relative z-10">
-                  <div className={`w-16 h-16 rounded-2xl bg-slate-50 flex items-center justify-center shrink-0 border border-slate-100 group-hover:border-violet-100 transition-all`}>
+                  <div className={`w-16 h-16 rounded-2xl bg-slate-50 flex items-center justify-center shrink-0 border border-slate-100 group-hover:border-slate-100 transition-all`}>
                     {topic.icon}
                   </div>
                   <div className="flex-1">
-                     <h3 className="text-xl font-black text-slate-900 tracking-tighter uppercase group-hover:text-violet-600 transition-colors leading-none mb-2">
+                     <h3 className="text-xl font-black text-slate-900 tracking-tighter uppercase group-hover:text-slate-600 transition-colors leading-none mb-2">
                        {topic.title}
                      </h3>
                      <p className="text-[11px] font-bold text-slate-400 leading-relaxed mb-6 uppercase tracking-widest opacity-80">
                        {topic.description}
                      </p>
                      <div className="flex items-center justify-between">
-                        <span className="inline-flex items-center gap-2 text-[11px] font-black uppercase tracking-widest text-slate-300 group-hover:text-violet-600 transition-colors">
+                        <span className="inline-flex items-center gap-2 text-[11px] font-black uppercase tracking-widest text-slate-300 group-hover:text-slate-600 transition-colors">
                           Access Protocol <ChevronRight className="w-3.5 h-3.5" />
                         </span>
                         <div 
@@ -120,10 +120,10 @@ export function EducationView({ setActiveView }) {
          {/* Technical Reliability Insight */}
          <Card className="p-8 bg-slate-950 border-white/5 shadow-2xl text-white flex flex-col md:flex-row items-center justify-between gap-6 relative group rounded-[2.5rem] overflow-hidden">
             <div className="absolute top-0 right-0 p-6 opacity-10 pointer-events-none">
-               <Microscope className="w-24 h-24 text-violet-400" />
+               <Microscope className="w-24 h-24 text-slate-400" />
             </div>
             <div className="relative z-10 flex items-center gap-6">
-               <div className="w-14 h-14 rounded-2xl bg-white/10 flex items-center justify-center text-violet-400 border border-white/5 shadow-inner">
+               <div className="w-14 h-14 rounded-2xl bg-white/10 flex items-center justify-center text-slate-400 border border-white/5 shadow-inner">
                   <Zap className="w-7 h-7 animate-pulse" />
                </div>
                <div>

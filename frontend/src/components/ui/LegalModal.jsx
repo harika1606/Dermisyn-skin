@@ -2,7 +2,7 @@ import React from 'react';
 import { Card } from './Card';
 import { Button } from './Button';
 import { X, ShieldAlert, FileText, Scale } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion'; // eslint-disable-line no-unused-vars
+import { motion, AnimatePresence } from 'framer-motion';
 
 /**
  * LegalModal: Displays standardized medical disclaimers and terms of service.
@@ -72,7 +72,7 @@ export function LegalModal({ isOpen, onClose }) {
   );
 }
 
-function LegalSection({ icon: Icon, title, content }) { // eslint-disable-line no-unused-vars
+function LegalSection({ icon: Icon, title, content }) {
   return (
     <div className="space-y-6">
        <div className="flex items-center gap-4 text-[#ec4899]">

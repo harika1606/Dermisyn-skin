@@ -30,9 +30,11 @@ app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024 # 16 MB max upload
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'bmp', 'heic'}
 
 # Production-Ready Database Configuration
-# Priority 1: Use DATABASE_URL from environment
-# Priority 2: Fallback to local SQLite for immediate cloud accessibility
-app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL', 'sqlite:///' + os.path.join(os.path.dirname(__file__), 'dermisyn.db'))
+# Primary 1: Use DATABASE_URL from environment
+# Priority 2: MySQL Workbench Synchronization
+# Default: mysql+pymysql://root:%40Harika2711@localhost/skynex_db
+MYSQL_URI = "mysql+pymysql://root:%40Harika2711@localhost/skynex_db"
+app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL', MYSQL_URI)
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['JWT_SECRET_KEY'] = os.getenv('JWT_SECRET_KEY', 'dermai-super-secret-key-123')
 app.config['JWT_ACCESS_TOKEN_EXPIRES'] = timedelta(days=7)

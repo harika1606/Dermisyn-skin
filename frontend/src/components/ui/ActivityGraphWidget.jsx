@@ -1,10 +1,11 @@
 import React, { useMemo } from 'react';
+import { motion } from 'framer-motion';
 import { Card } from './Card';
 import { TrendingUp, Activity, BarChart3 } from 'lucide-react';
 
 /**
  * ActivityGraphWidget: Visualizes user activity and scan volume over time.
- * Fully transitioned to the 'Clinical Violet' identity.
+ * Fully transitioned to the 'Clinical slate' identity.
  */
 export function ActivityGraphWidget({ scans }) {
   const totalDays = 14;
@@ -29,13 +30,13 @@ export function ActivityGraphWidget({ scans }) {
       
       <div className="flex justify-between items-start mb-8 relative z-10">
         <div>
-           <div className="flex items-center gap-3 mb-2 text-violet-400">
+           <div className="flex items-center gap-3 mb-2 text-slate-400">
               <TrendingUp className="w-5 h-5 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
               <h3 className="text-[11px] font-black uppercase tracking-[0.3em]">Diagnostic Flux</h3>
            </div>
            <p className="text-2xl md:text-3xl font-black text-white tracking-tighter uppercase leading-none">Diagnostic Velocity</p>
         </div>
-        <div className="px-4 py-2 rounded-xl bg-violet-500/10 border border-violet-500/20 text-violet-400 text-[11px] font-black uppercase tracking-widest flex items-center gap-3">
+        <div className="px-4 py-2 rounded-xl bg-slate-500/10 border border-slate-500/20 text-slate-400 text-[11px] font-black uppercase tracking-widest flex items-center gap-3">
            <Activity className="w-4 h-4 animate-pulse" /> Sync Active
         </div>
       </div>
@@ -56,11 +57,11 @@ export function ActivityGraphWidget({ scans }) {
                  transition={{ duration: 1.2, delay: i * 0.05, ease: [0.16, 1, 0.3, 1] }}
                  className={`w-full max-w-[12px] rounded-t-full transition-all duration-700 relative 
                    ${isCurrentDay 
-                      ? 'bg-gradient-to-t from-violet-600 to-violet-400 shadow-[0_5px_20px_rgba(124,58,237,0.4)]' 
+                      ? 'bg-gradient-to-t from-slate-600 to-slate-400 shadow-[0_5px_20px_rgba(124,58,237,0.4)]' 
                       : 'bg-white/5 group-hover/bar:bg-white/10'}`}
                >
                   {isCurrentDay && (
-                    <div className="absolute -top-10 left-1/2 -translate-x-1/2 text-[11px] font-black text-violet-400 opacity-0 group-hover/bar:opacity-100 transition-opacity whitespace-nowrap">
+                    <div className="absolute -top-10 left-1/2 -translate-x-1/2 text-[11px] font-black text-slate-400 opacity-0 group-hover/bar:opacity-100 transition-opacity whitespace-nowrap">
                        Load: {value}%
                     </div>
                   )}
@@ -72,7 +73,7 @@ export function ActivityGraphWidget({ scans }) {
 
       <div className="mt-6 flex justify-between text-[11px] font-black text-slate-500 uppercase tracking-[0.2em] relative z-10 border-t border-white/5 pt-4">
          <span className="flex items-center gap-2"><BarChart3 className="w-3.5 h-3.5" /> 14-Day Cycle</span>
-         <span className="text-violet-400">Stable Real-time</span>
+         <span className="text-slate-400">Stable Real-time</span>
       </div>
     </Card>
   );

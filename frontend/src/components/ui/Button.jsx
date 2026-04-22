@@ -1,11 +1,11 @@
 import React from 'react';
 import { cn } from '../../lib/utils';
-import { motion } from 'framer-motion'; // eslint-disable-line no-unused-vars
+import { motion } from 'framer-motion';
 import { Loader2 } from 'lucide-react';
 
 /**
  * Custom Button component for the Dermisyn clinical design system.
- * Transitioned to 'Clinical Violet' identity.
+ * Transitioned to 'Clinical slate' identity.
  * 
  * @param {string} variant - One of: 'primary', 'secondary', 'outline', 'ghost', 'danger', 'white'
  * @param {string} size - One of: 'sm', 'default', 'lg', 'icon'
@@ -20,12 +20,12 @@ export const Button = React.forwardRef(({
   ...props 
 }, ref) => {
   
-  // Style variations for the 'Clinical Violet' theme
+  // Style variations for the 'Clinical slate' theme
   const variantStyles = {
-    primary: "bg-gradient-to-r from-violet-600 via-violet-500 to-violet-700 bg-[size:200%] hover:bg-right text-white shadow-premium border border-white/10",
-    secondary: "bg-violet-50 text-violet-700 hover:bg-violet-100 border border-violet-100 shadow-sm",
-    outline: "bg-transparent border border-slate-200 text-slate-500 hover:border-violet-600 hover:text-violet-600 transition-all",
-    ghost: "bg-transparent hover:bg-violet-50 text-slate-500 hover:text-violet-600 border border-transparent",
+    primary: "bg-gradient-to-r from-slate-600 via-slate-500 to-slate-700 bg-[size:200%] hover:bg-right text-white shadow-premium border border-white/10",
+    secondary: "bg-slate-50 text-slate-700 hover:bg-slate-100 border border-slate-100 shadow-sm",
+    outline: "bg-transparent border border-slate-200 text-slate-500 hover:border-slate-600 hover:text-slate-600 transition-all",
+    ghost: "bg-transparent hover:bg-slate-50 text-slate-500 hover:text-slate-600 border border-transparent",
     danger: "bg-rose-500 text-white hover:bg-rose-600 shadow-lg",
     white: "bg-white text-slate-950 hover:bg-slate-50 border border-slate-200 shadow-xl font-black",
   };
@@ -44,7 +44,7 @@ export const Button = React.forwardRef(({
       whileTap={{ scale: 0.99 }}
       disabled={isLoading || props.disabled}
       className={cn(
-        "inline-flex items-center justify-center rounded-[18px] transition-all duration-500 focus:outline-none focus:ring-2 focus:ring-violet-600/20 disabled:opacity-50 disabled:pointer-events-none overflow-hidden",
+        "inline-flex items-center justify-center rounded-[18px] transition-all duration-500 focus:outline-none focus:ring-2 focus:ring-slate-600/20 disabled:opacity-50 disabled:pointer-events-none overflow-hidden",
         variantStyles[variant],
         sizeStyles[size],
         className
