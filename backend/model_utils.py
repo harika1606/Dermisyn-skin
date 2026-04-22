@@ -61,6 +61,7 @@ def load_model():
     
     # 2. Force Load Trained Weights
     # Automatic ZIP extraction logic for Cloud Deployment
+    MODEL_DIR = os.path.dirname(MODEL_WEIGHTS_PATH)
     ZIP_PATH = os.path.join(MODEL_DIR, "model.zip")
     
     if not os.path.exists(MODEL_WEIGHTS_PATH) and os.path.exists(ZIP_PATH):
