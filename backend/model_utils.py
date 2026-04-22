@@ -60,8 +60,20 @@ def load_model():
     model.head = nn.Linear(model.head.in_features, num_classes)
     
     # 2. Force Load Trained Weights
-    if os.path.exists(MODEL_WEIGHTS_PATH):
-        print(f"--> Found trained weights at {MODEL_WEIGHTS_PATH}. Syncing...")
+    # Automatic ZIP extraction logic for Cloud Deployment
+    ZIP_PATH = os.path.join(MODEL_DIR, "model.zip")
+    
+    if not os.path.exists(MODEL_WEIGHTS_PATH) and os.path.exists(ZIP_PATH):
+        print("Model: Extracting model.zip...")
+        import zipfile
+        with zipfile.ZipFile(ZIP_PATH, 'r') as zip_ref:
+            zip_ref.extractall(MODEL_DIR)
+        print("Model: Extraction complete.")
+
+    if not os.path.exists(MODEL_WEIGHTS_PATH):
+        print(f"--> [ERROR] Essential weights missing at {MODEL_WEIGHTS_PATH}. AI is currently in 'Dumb Mode'.")
+    else:
+        print(f"Model: Loading weights from {MODEL_WEIGHTS_PATH}")
         ckpt = torch.load(MODEL_WEIGHTS_PATH, map_location=device, weights_only=False)
         
         # Structure Extraction
