@@ -107,8 +107,6 @@ def load_model():
                 print("--> SUCCESS: Base model weights synchronized (tracked buffers skipped).")
         else:
             print("--> SUCCESS: 100% Brain Layers synchronized and active.")
-    else:
-        print(f"--> [ERROR] Essential weights missing at {MODEL_WEIGHTS_PATH}. AI is currently in 'Dumb Mode'.")
         
     model = model.to(device)
     model.eval() # Deployment Mode
