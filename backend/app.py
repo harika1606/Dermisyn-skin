@@ -30,11 +30,17 @@ app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024 # 16 MB max upload
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'bmp', 'heic'}
 
 # Production-Ready Database Configuration
-# Primary 1: Use DATABASE_URL from environment
-# Priority 2: MySQL Workbench Synchronization
-# Default: mysql+pymysql://root:%40Harika2711@localhost/skynex_db
-MYSQL_URI = "mysql+pymysql://root:%40Harika2711@localhost/skynex_db"
-app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL', MYSQL_URI)
+# Priority 1: Use DATABASE_URL from cloud environment (Railway/Render)
+# Priority 2: Fallback to local MySQL for Workbench sync (Development only)
+MYSQL_DEV_URI = "mysql+pymysql://root:%40Harika2711@localhost/skynex_db"
+DATABASE_URL = os.getenv('DATABASE_URL')
+
+if DATABASE_URL:
+    print("Database: Using Cloud Production Environment")
+    app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE_URL
+else:
+    print("Database: WARNING! No DATABASE_URL found. Falling back to Local Development.")
+    app.config['SQLALCHEMY_DATABASE_URI'] = MYSQL_DEV_URI
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['JWT_SECRET_KEY'] = os.getenv('JWT_SECRET_KEY', 'dermai-super-secret-key-123')
 app.config['JWT_ACCESS_TOKEN_EXPIRES'] = timedelta(days=7)
